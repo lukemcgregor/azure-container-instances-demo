@@ -8,7 +8,7 @@ setInterval(
                 console.log(body);
              }
              else{
-                 console.log(`${response.statusCode} : ${error}`);
+                 console.log(`${error || response.statusCode}`);
              }
         });
     },
