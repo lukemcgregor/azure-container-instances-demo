@@ -1,19 +1,15 @@
-var http = require('http');
+var request = require('request');
 
 setInterval(
     ()=>{
-        http.get({
-            host: 'aci-demo-web',
-            path: '/'
-        }, function(response) {
-            // Continuously update stream with data
-            var body = '';
-            response.on('data', function(d) {
-                body += d;
-            });
-            response.on('end', function() {
-                console.log(`${new Date().toISOString()} | API : ${body}`);
-            });
+        console.log(`${new Date().toISOString()}`);
+        request('http://aci-demo-web/', function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+             }
+             else{
+                 console.log(`${response.statusCode} : ${error}`);
+             }
         });
     },
     60 * 1000
